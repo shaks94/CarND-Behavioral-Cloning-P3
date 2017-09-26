@@ -134,6 +134,6 @@ All these data was used for training the model with three epochs. The data was s
 
 <img src="model_mse_lost.png"  width="200"/>
  
-After this training, the car was driving down the road all the time on the [first](video.mp4) and in some part of second track 
+After this training, the car was driving down the road all the time on the [first](run1.mp4) and in some part of second track 
 
 
