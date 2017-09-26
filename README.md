@@ -59,7 +59,7 @@ The model.py file contains the code for training and saving the convolution neur
 
 #### 1. An appropriate model architecture has been employed
 
-My initial approach was to use [LeNet](http://yann.lecun.com/exdb/lenet/), but it was hard to have the car inside the street with three epochs (this model could be found [here](clone.py#L81-L94)). After this, I decided to try the [nVidia Autonomous Car Group](https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/) model, and the car drove the complete first track after just three training epochs (this model could be found [here](model.py#L108-L123)).
+My initial approach was to use [LeNet](http://yann.lecun.com/exdb/lenet/), but it was hard to have the car inside the street with three epochs. After this, I decided to try the [nVidia Autonomous Car Group](https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/) model, and the car drove the complete first track after just three training epochs.
 
 A model summary is as follows:
 
@@ -112,9 +112,9 @@ For details about how I created the training data, see the next section.
 
 #### 1. Solution Design Approach
 
-##### My first step was to try the LeNet](http://yann.lecun.com/exdb/lenet/) model with three epochs and the training data provided by Udacity. On the first track, the car went straight to the lake. I needed to do some pre-processing. A  `Lambda` layer was introduced to normalize the input images to zero means. This step allows the car to move a bit further, but it didn't get to the first turn. Another `Cropping` was introduced, and the first turn was almost there, but not quite.
+##### My first step was to try the [LeNet] (http://yann.lecun.com/exdb/lenet/) model with three epochs and the training data provided by Udacity. On the first track, the car went straight to the lake. I needed to do some pre-processing. A  `Lambda` layer was introduced to normalize the input images to zero means. This step allows the car to move a bit further, but it didn't get to the first turn. Another `Cropping` was introduced, and the first turn was almost there, but not quite.
 
-##### The second step was to use a more powerfull model: [nVidia Autonomous Car Group](https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/) The only modification was to add a new
+##### The second step was to use better  model: [nVidia Autonomous Car Group] (https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/) The only modification was to add a new
 
 ##### layer at the end to have a single output as it was required. This time the car did its first complete track, but there 
 #### was a place in the track where it passes over the "dashed" line. More data was needed. Augmented the data by adding the same image flipped with a negative angleIn addition to that, the left and right camera images where introduced with a correction factor on the angle to help the car go back to the lane, After this process, the car continues to have the same problem with the same "dashed" line.
