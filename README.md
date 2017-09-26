@@ -1,122 +1,139 @@
-# Behaviorial Cloning Project
 
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+# CarND-Behavioral-Cloning-P3
+Udacity Self Driving Car Nanodegree - Behavioral Cloning
 
-Overview
----
-This repository contains starting files for the Behavioral Cloning Project.
+# Installation
+To create an environment for this project use the following command:
 
-In this project, you will use what you've learned about deep neural networks and convolutional neural networks to clone driving behavior. You will train, validate and test a model using Keras. The model will output a steering angle to an autonomous vehicle.
-
-We have provided a simulator where you can steer a car around a track for data collection. You'll use image data and steering angles to train a neural network and then use this model to drive the car autonomously around the track.
-
-We also want you to create a detailed writeup of the project. Check out the [writeup template](https://github.com/udacity/CarND-Behavioral-Cloning-P3/blob/master/writeup_template.md) for this project and use it as a starting point for creating your own writeup. The writeup can be either a markdown file or a pdf document.
-
-To meet specifications, the project will require submitting five files: 
-* model.py (script used to create and train the model)
-* drive.py (script to drive the car - feel free to modify this file)
-* model.h5 (a trained Keras model)
-* a report writeup file (either markdown or pdf)
-* video.mp4 (a video recording of your vehicle driving autonomously around the track for at least one full lap)
-
-This README file describes how to output the video in the "Details About Files In This Directory" section.
-
-Creating a Great Writeup
----
-A great writeup should include the [rubric points](https://review.udacity.com/#!/rubrics/432/view) as well as your description of how you addressed each point.  You should include a detailed description of the code used (with line-number references and code snippets where necessary), and links to other supporting documents or external references.  You should include images in your writeup to demonstrate how your code works with examples.  
-
-All that said, please be concise!  We're not looking for you to write a book here, just a brief description of how you passed each rubric point, and references to the relevant code :). 
-
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup.
-
-The Project
----
-The goals / steps of this project are the following:
-* Use the simulator to collect data of good driving behavior 
-* Design, train and validate a model that predicts a steering angle from image data
-* Use the model to drive the vehicle autonomously around the first track in the simulator. The vehicle should remain on the road for an entire loop around the track.
-* Summarize the results with a written report
-
-### Dependencies
-This lab requires:
-
-* [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit)
-
-The lab enviroment can be created with CarND Term1 Starter Kit. Click [here](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) for the details.
-
-The following resources can be found in this github repository:
-* drive.py
-* video.py
-* writeup_template.md
-
-The simulator can be downloaded from the classroom. In the classroom, we have also provided sample data that you can optionally use to help train your model.
-
-## Details About Files In This Directory
-
-### `drive.py`
-
-Usage of `drive.py` requires you have saved the trained model as an h5 file, i.e. `model.h5`. See the [Keras documentation](https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model) for how to create this file using the following command:
-```sh
-model.save(filepath)
+```
+conda env create -f environment.yml
 ```
 
-Once the model has been saved, it can be used with drive.py using this command:
+After the environment is created, it needs to be activated with the command:
 
-```sh
-python drive.py model.h5
+```
+source activate self_drive (env name)
 ```
 
-The above command will load the trained model and use the model to make predictions on individual images in real-time and send the predicted angle back to the server via a websocket connection.
+# Project
 
-Note: There is known local system's setting issue with replacing "," with "." when using drive.py. When this happens it can make predicted steering values clipped to max/min values. If this occurs, a known fix for this is to add "export LANG=en_US.utf8" to the bashrc file.
+## Goals
 
-#### Saving a video of the autonomous agent
+The goals/steps of this project are the following:
 
-```sh
-python drive.py model.h5 run1
+- Use the simulator to collect data of good driving behavior.
+- Build, a convolution neural network in [Keras](https://keras.io/) that predicts steering angles from images.
+- Train and validate the model with a training and validation set.
+- Test that the model successfully drives around track one without leaving the road.
+- Summarize the results with a written report.
+
+## Rubric points
+
+Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.
+
+### Files Submitted & Code Quality
+
+#### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
+My project includes the following files:
+
+- **model.py** : Containing the script to create and train the model
+- **drive.py** : For driving the car in autonomous mode in the simulator 
+- **writeup_report.md** : Summarizing the results
+- **run1.mpy** : video sample
+
+Node:
+
+On my first iteration, I tried [LeNet](http://yann.lecun.com/exdb/lenet/) model and [nVidia Autonomous Car Group](https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/) model
+
+#### 2. Submission includes functional code Using the Udacity provided simulator and my drive.py file; the car can be driven autonomously around the track by executing
+
+```
+Python drive.py model.h5
 ```
 
-The fourth argument, `run1`, is the directory in which to save the images seen by the agent. If the directory already exists, it'll be overwritten.
+#### 3. Submission code is usable and readable
 
-```sh
-ls run1
+The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
-[2017-01-09 16:10:23 EST]  12KiB 2017_01_09_21_10_23_424.jpg
-[2017-01-09 16:10:23 EST]  12KiB 2017_01_09_21_10_23_451.jpg
-[2017-01-09 16:10:23 EST]  12KiB 2017_01_09_21_10_23_477.jpg
-[2017-01-09 16:10:23 EST]  12KiB 2017_01_09_21_10_23_528.jpg
-[2017-01-09 16:10:23 EST]  12KiB 2017_01_09_21_10_23_573.jpg
-[2017-01-09 16:10:23 EST]  12KiB 2017_01_09_21_10_23_618.jpg
-[2017-01-09 16:10:23 EST]  12KiB 2017_01_09_21_10_23_697.jpg
-[2017-01-09 16:10:23 EST]  12KiB 2017_01_09_21_10_23_723.jpg
-[2017-01-09 16:10:23 EST]  12KiB 2017_01_09_21_10_23_749.jpg
-[2017-01-09 16:10:23 EST]  12KiB 2017_01_09_21_10_23_817.jpg
-...
+### Model Architecture and Training Strategy
+
+#### 1. An appropriate model architecture has been employed
+
+My initial approach was to use [LeNet](http://yann.lecun.com/exdb/lenet/), but it was hard to have the car inside the street with three epochs (this model could be found [here](clone.py#L81-L94)). After this, I decided to try the [nVidia Autonomous Car Group](https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/) model, and the car drove the complete first track after just three training epochs (this model could be found [here](model.py#L108-L123)).
+
+A model summary is as follows:
+
+```
+Layer (type)                                  Connected to                     
+====================================================================================================
+lambda_1 (Lambda)              |    lambda_input_2[0][0]             
+_______________________________|_____________________________________________________________________
+cropping2d_1 (Cropping2D)      |    lambda_1[0][0]                   
+_______________________________|_____________________________________________________________________
+convolution2d_1 (Convolution2D)|    cropping2d_1[0][0]               
+_______________________________|_____________________________________________________________________
+convolution2d_2 (Convolution2D)|    convolution2d_1[0][0]            
+_______________________________|_____________________________________________________________________
+Dropout                        |    convolution2d_2[0][0]
+_______________________________|______________________________________________________________________
+convolution2d_3 (Convolution2D)|    Dropout            
+_______________________________|_____________________________________________________________________
+convolution2d_4 (Convolution2D)|    convolution2d_3[0][0]            
+_______________________________|_____________________________________________________________________
+convolution2d_5 (Convolution2D)|    convolution2d_4[0][0]            
+_______________________________|_____________________________________________________________________
+flatten_1 (Flatten)            |    convolution2d_5[0][0]            
+_______________________________|_____________________________________________________________________
+dense_1 (Dense)                |    flatten_1[0][0]                  
+_______________________________|_____________________________________________________________________
+dense_2 (Dense)                |    dense_1[0][0]                    
+_______________________________|_____________________________________________________________________
+dense_3 (Dense)                |    dense_2[0][0]                    
+_______________________________|_____________________________________________________________________
+dense_4 (Dense)                |    dense_3[0][0]                    
+====================================================================================================
 ```
 
-The image file name is a timestamp of when the image was seen. This information is used by `video.py` to create a chronological video of the agent driving.
+(More details about this bellow.)
 
-### `video.py`
+#### 2. Attempts to reduce overfitting in the model
 
-```sh
-python video.py run1
-```
+I decided  to modify the model by applying regularization techniques like [Dropout](https://en.wikipedia.org/wiki/Dropout_(neural_networks)) of .1 only (due to low epoch).thendecided to keep the training epochs low: only three epochs.
+In addition to that, I split my sample data into training and validation data
+The model used an Adam optimizer, so the learning rate was not tuned manually
 
-Creates a video based on images found in the `run1` directory. The name of the video will be the name of the directory followed by `'.mp4'`, so, in this case the video will be `run1.mp4`.
+#### 4. Appropriate training data
 
-Optionally, one can specify the FPS (frames per second) of the video:
+Training data was chosen to keep the vehicle driving on the road. Also, the data provided by Udacity, I used the first track and second track data. The simulator provides three different images: center, left and right cameras. Each image was used to train the model.
 
-```sh
-python video.py run1 --fps 48
-```
+For details about how I created the training data, see the next section.
 
-Will run the video at 48 FPS. The default FPS is 60.
+### Model Architecture and Training Strategy
 
-#### Why create a video
+#### 1. Solution Design Approach
 
-1. It's been noted the simulator might perform differently based on the hardware. So if your model drives succesfully on your machine it might not on another machine (your reviewer). Saving a video is a solid backup in case this happens.
-2. You could slightly alter the code in `drive.py` and/or `video.py` to create a video of what your model sees after the image is processed (may be helpful for debugging).
+##### My first step was to try the LeNet](http://yann.lecun.com/exdb/lenet/) model with three epochs and the training data provided by Udacity. On the first track, the car went straight to the lake. I needed to do some pre-processing. A  `Lambda` layer was introduced to normalize the input images to zero means. This step allows the car to move a bit further, but it didn't get to the first turn. Another `Cropping` was introduced, and the first turn was almost there, but not quite.
 
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
+##### The second step was to use a more powerfull model: [nVidia Autonomous Car Group](https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/) The only modification was to add a new
+
+##### layer at the end to have a single output as it was required. This time the car did its first complete track, but there 
+#### was a place in the track where it passes over the "dashed" line. More data was needed. Augmented the data by adding the same image flipped with a negative angleIn addition to that, the left and right camera images where introduced with a correction factor on the angle to help the car go back to the lane, After this process, the car continues to have the same problem with the same "dashed" line.
+
+#### 2. Creation of the Training Set & Training Process
+
+To have more data, the following tracks were capture:
+
+- First track.
+  - One track driving forward partial driving.
+  - One track driving backward partial driving.
+- half second track driving 
+
+All these data was used for training the model with three epochs. The data was shuffled randomly. The following picture shows the training:
+
+[Model Mean-square ](model_mse_lost.png)
+
+<img src="model_mse_lost.png"  width="200"/>
+ 
+After this training, the car was driving down the road all the time on the [first](video.mp4) and in some part of second track 
+
 
