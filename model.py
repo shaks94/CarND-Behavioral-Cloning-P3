@@ -63,7 +63,7 @@ def imgageFormation(lines):
         measurement = float(line[3])
         totalMeasurements.append(measurement)
 
-        return (center,left,right,totalMeasurements)
+    return (center,left,right,totalMeasurements)
 
 def generator(samples, batch_size=32):
     """
@@ -99,16 +99,17 @@ def modelFormation():
     # model.add(Cropping2D(cropping=((40,15),(0,0))))
 
     a= model.add(Convolution2D(24, 5, 5, subsample=(2, 2), activation="relu"))
-    print("a here ",a.size)
     # model.add(MaxPooling2D((2,2),strides=(2,2)))
     model.add(Convolution2D(36, 5, 5, subsample=(2, 2), activation="relu"))
     # model.add(MaxPooling2D((2,2),strides=(2,2)))
-    model.add(Dropout(0.1))
+    model.add(Dropout(0.3))
 
     model.add(Convolution2D(48, 5, 5, subsample=(2, 2), activation="relu"))
     # model.add(MaxPooling2D((2,2),strides=(2,2)))
 
     model.add(Convolution2D(64, 3, 3, activation="relu"))
+
+
     # model.add(MaxPooling2D((2,2),strides=(2,2)))
 
     model.add(Convolution2D(64, 3, 3, activation="relu"))
@@ -136,6 +137,7 @@ model.compile(loss='mse', optimizer='adam')
 # model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=5)
 history_object = model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator,nb_val_samples=len(validation_samples), nb_epoch=3, verbose=1)
 model.save('model.h5')
+
 
 print("history object keys")
 print(history_object.history.keys())

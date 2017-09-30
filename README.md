@@ -130,9 +130,19 @@ To have more data, the following tracks were capture:
 
 All these data was used for training the model with three epochs. The data was shuffled randomly. The following picture shows the training:
 
-[Model Mean-square ](model_mse_lost.png)
+[Model Mean-square ](new_model_mse_loss.png)
 
-<img src="model_mse_lost.png"  width="200"/>
+
+MSE image               <img src="new_model_mse_loss.png"  width="200"/>
+
+sample image 1          <img src="1.jpg"  width="200"/>
+sample image 2          <img src="2.jpg"  width="200"/>
+sample image 3          <img src="3.jpg"  width="200"/>
+recovery image 1        <img src="recovery1.jpg"  width="200"/>
+recovery image 2        <img src="recovery2.jpg"  width="200"/>
+
+sample image track2     <img src="track2.jpg"  width="200"/>
+
  
 After this training, the car was driving down the road all the time on the [first](run1.mp4) and in some part of second track 
 

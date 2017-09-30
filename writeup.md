@@ -79,7 +79,37 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 ####2. Final Model Architecture
 
-The final model architecture  consisted of a convolution neural network with the following layers and layer sizes ...
+The final model architecture  consisted of a convolution neural network with the following strucutre define below 
+```
+Layer (type)                                  Connected to                     
+====================================================================================================
+lambda_1 (Lambda)              |    lambda_input_2[0][0]             
+_______________________________|_____________________________________________________________________
+cropping2d_1 (Cropping2D)      |    lambda_1[0][0]                   
+_______________________________|_____________________________________________________________________
+convolution2d_1 (Convolution2D)|    cropping2d_1[0][0]               
+_______________________________|_____________________________________________________________________
+convolution2d_2 (Convolution2D)|    convolution2d_1[0][0]            
+_______________________________|_____________________________________________________________________
+Dropout                        |    convolution2d_2[0][0]
+_______________________________|______________________________________________________________________
+convolution2d_3 (Convolution2D)|    Dropout of .3            
+_______________________________|_____________________________________________________________________
+convolution2d_4 (Convolution2D)|    convolution2d_3[0][0]            
+_______________________________|_____________________________________________________________________
+convolution2d_5 (Convolution2D)|    convolution2d_4[0][0]            
+_______________________________|_____________________________________________________________________
+flatten_1 (Flatten)            |    convolution2d_5[0][0]            
+_______________________________|_____________________________________________________________________
+dense_1 (Dense)                |    flatten_1[0][0]                  
+_______________________________|_____________________________________________________________________
+dense_2 (Dense)                |    dense_1[0][0]                    
+_______________________________|_____________________________________________________________________
+dense_3 (Dense)                |    dense_2[0][0]                    
+_______________________________|_____________________________________________________________________
+dense_4 (Dense)                |    dense_3[0][0]                    
+====================================================================================================
+```
 
 
 ####3. Creation of the Training Set & Training Process
@@ -103,6 +133,10 @@ I finally randomly shuffled the data set and put Y% of the data into a validatio
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
 
-```python
+####4. Final image means square loass difference 
 
-```
+MSE image  before dropout <img src="new_model_mse_loss.png"  width="200"/>
+MSE image2 after dropoup  <img src="new_model_mse_loss.png"  width="200"/>
+
+
+
